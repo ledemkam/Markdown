@@ -1,18 +1,42 @@
-import { Button, Modal } from "react-bootstrap"
+import { Button, Form, Modal, Stack,Col ,Row} from "react-bootstrap"
+import { EditTagsModalProps } from "../../types"
 
-const Editmodal = () => {
+const Editmodal = ({   availableTags,
+  handleClose,
+  show,
+  onDeleteTag,
+  onUpdateTag,
+}: EditTagsModalProps) => {
   return (
-    <Modal>
-      <Modal.Header>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
         <Modal.Title>Edit Tags</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Modal body content</p>
+        <Form>
+          <Stack gap={2}>
+            {availableTags.map(tag => (
+              <Row key={tag.id}>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={e => onUpdateTag(tag.id, e.target.value)}
+                  />
+                </Col>
+                <Col xs="auto">
+                  <Button
+                    onClick={() => onDeleteTag(tag.id)}
+                    variant="outline-danger"
+                  >
+                    &times;
+                  </Button>
+                </Col>
+              </Row>
+            ))}
+          </Stack>
+        </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary">Save changes</Button>
-      </Modal.Footer>
     </Modal>
   )
 }

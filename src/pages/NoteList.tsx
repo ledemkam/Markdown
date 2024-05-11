@@ -6,17 +6,22 @@ import {
   Form,
   Row,
   Stack,
+
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
-import { NoteListProps, Tag } from "../types"
+import {  NoteListProps, Tag } from "../types"
+import Editmodal from "../components/ui/Editmodal"
 
 
 
 
-const NoteList = ({availableTags,notes}: NoteListProps) => {
+const NoteList = ({availableTags,notes,  onUpdateTag,
+  onDeleteTag,}: NoteListProps) => {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
   const [title, setTitle] = useState("")
+  const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false)
+
  
   const filteredNotes = useMemo(() => {
     return notes.filter(note => {
@@ -89,15 +94,23 @@ const NoteList = ({availableTags,notes}: NoteListProps) => {
        {filteredNotes.map(note => (
           <Col key={note.id}>
            <NoteCard id={note.id} title={note.title} tags={note.tags}/>
-          </Col>
-        
+          </Col>     
        ))}
       </Row>
+      <Editmodal
+        onUpdateTag={onUpdateTag}
+        onDeleteTag={onDeleteTag}
+        show={editTagsModalIsOpen}
+        handleClose={() => setEditTagsModalIsOpen(false)}
+        availableTags={availableTags}
+      />
     </>
   )
 }
 
 export default NoteList
+
+
 
 
 

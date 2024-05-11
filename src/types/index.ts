@@ -44,3 +44,4 @@ export type EditTagsModalProps = {
   onDeleteTag: (id: string) => void
   onUpdateTag: (id: string, label: string) => void
 }
+
