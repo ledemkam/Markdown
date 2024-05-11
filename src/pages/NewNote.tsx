@@ -1,5 +1,5 @@
-import { NoteData, Tag } from "@/types"
 import NoteForm from "../components/forms/NoteForm"
+import { NoteData, Tag } from "../types"
 type NewNoteProps = {
   onSubmit: (data: NoteData) => void
   onAddTag: (tag: Tag) => void
