@@ -1,16 +1,16 @@
-import { NoteData, Tag } from "@/types"
 import { nanoid } from "nanoid"
 import { FormEvent, useRef, useState } from "react"
 import { Button, Col, Form, Row, Stack } from "react-bootstrap"
 import { Link, useNavigate} from "react-router-dom"
 import CreatableReactSelect from 'react-select/creatable'
+import { NoteData, Tag } from "../../types"
 
 
 type NoteFormProps = {
   onSubmit: (data : NoteData) => void
   onAddTag: (tag: Tag) => void
   availableTags: Tag[]
-}
+} & Partial<NoteData>
 
 const NoteForm = ({onSubmit,onAddTag,availableTags} : NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null)  
